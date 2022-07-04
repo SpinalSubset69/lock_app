@@ -8,13 +8,11 @@ export class PasswordsService {
     this.#_passwordsRepo = new PasswordsRepository()
   }
 
-  async saveUserPasswordAsync(userId, password) {
-    const passwordHashed = await cartography.Encrypt(password)
-    const newPassword = {
-      userId: userId,
-      value: passwordHashed,
-    }
-    return await this.#_passwordsRepo.saveAsync(newPassword)
+  async saveUserPasswordAsync(args) {
+    return await this.#_passwordsRepo.saveAsync({
+      ...args,
+      value: await cartography.Encrypt(args.value),
+    })
   }
 
   async updateUserPasswordAsync(password) {

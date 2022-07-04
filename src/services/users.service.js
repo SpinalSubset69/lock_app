@@ -20,5 +20,9 @@ export class UsersService {
     return await this.#_usersRepo.findUserbyIdWithPasswordsAsync(userId)
   }
 
+  async findUserByIdAsync(userId){    
+    return await this.#_usersRepo.findByIdAsync(userId)
+  }
+
   async 
 }

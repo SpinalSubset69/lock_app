@@ -9,6 +9,13 @@ export class PasswordsController {
 
   savePassword = async (req, res) => {
     try {
+      //TODO: PASSWORD MUST COM ENCRYPTED FROM THE CLIENT
+      const newPass = req.body
+      this.#_passwordsService.saveUserPasswordAsync(newPass)
+      res.status(200).json({
+        message: 'New Password saved',
+        isSuccess: true,
+      })
     } catch (e) {
       return res.status(404).json({
         isSuccess: false,

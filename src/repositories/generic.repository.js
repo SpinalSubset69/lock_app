@@ -14,6 +14,7 @@ export class GenericRepository {
 
   async findByIdAsync(pk) {
     try {
+      if (typeof pk !== 'number') throw new Error('User ID must be a number')
       return await this._db.models[this.schema].findByPk(pk)
     } catch (ex) {
       throw new Error(ex.message)

@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { validateSchemas } from '../middlewares'
 import { AuthController } from '../controllers'
 import { checkSchema } from 'express-validator'
-import { login_validation_schema } from '../validations/login.validations'
+import { login_validation_schema } from '../validations'
 import { user_validation_schema } from '../validations'
 
 const authController = new AuthController()

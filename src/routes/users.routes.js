@@ -1,7 +1,5 @@
 import { Router } from 'express'
 import { UsersController } from '../controllers'
-import { checkSchema } from 'express-validator'
-import { validateSchemas } from '../middlewares'
 
 const user_controller = new UsersController()
 

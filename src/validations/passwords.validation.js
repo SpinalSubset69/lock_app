@@ -1,20 +1,24 @@
 import { UsersService } from '../services'
 
 export const passwords_validation_schema = {
-  password: {
+  value: {
     notEmpty: true,
-    errorMessage: 'Password is required',
+    errorMessage: 'Value is required',
   },
-  userId: {
+  key: {
     notEmpty: true,
-    errorMessage: 'Password is required',
+    errorMessage: 'Key is required',
+  },
+  UserId: {
+    notEmpty: true,
+    errorMessage: 'User ID is required',
     custom: {
       options: (value) => {
         //CHECK EMAIL IS NOT REGISTERED
         const users_service = new UsersService()
-        return users_service.findUserByEmailAsync(value).then((user) => {
-          if (user) {
-            return Promise.reject('Email address already taken')
+        return users_service.findUserByIdAsync(value).then((user) => {
+          if (!user) {
+            return Promise.reject('User does not exists')
           }
         })
       },
