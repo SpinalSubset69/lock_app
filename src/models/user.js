@@ -29,5 +29,3 @@ export const User = db.define(
     timestamps: true,
   },
 )
-//CREATE TABLE
-User.sync({ force: true })

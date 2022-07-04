@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import { db, testConnection } from './database'
-import { User } from './models'
-import { userRoutes } from './routes/users.routes'
+import { db, connectToDatabase } from './database'
+import { BuildDBAssociations } from './models'
+import { authRoutes, passwordsRoutes, userRoutes } from './routes'
 
 const app = express()
 
@@ -11,9 +11,13 @@ app.use(cors())
 app.use(express.json())
 
 //Database
-testConnection(db)
+connectToDatabase(db)
+//BuildDBAssociations
+BuildDBAssociations()
 
 //ROUTES
-app.use('/api', userRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/auth', authRoutes)
+app.use('api/passwords', passwordsRoutes)
 
 export default app

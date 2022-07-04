@@ -1,1 +1,1 @@
-export { db, testConnection } from './connection'
+export { db, connectToDatabase } from './connection'

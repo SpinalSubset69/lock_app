@@ -10,9 +10,9 @@ export const user_validation_schema = {
     notEmpty: true,
     errorMessage: 'Last Name is required',
   },
-  phone:{
+  phone: {
     notEmpty: false,
-    errorMessage: "Phone format is invalid"
+    errorMessage: 'Phone format is invalid',
   },
   password: {
     isStrongPassword: {

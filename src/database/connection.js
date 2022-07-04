@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize'
 import { databaseConfig } from '../config'
+import { logEvents } from './../helpers'
 
 export const db = new Sequelize(
   databaseConfig.database,
@@ -11,12 +12,11 @@ export const db = new Sequelize(
   },
 )
 
-
-export const testConnection = async (databaseInstance) => {
-    try {
-        await databaseInstance.authenticate();
-        console.log('Connection has been established successfully with the database.');
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-      }
-} 
+export const connectToDatabase = async (databaseInstance) => {
+  try {
+    await databaseInstance.sync({ force: false })
+    logEvents('Connection has been established successfully with the database.')
+  } catch (error) {
+    logEvents(`Unable to connect to the database: ${error.message}`)
+  }
+}

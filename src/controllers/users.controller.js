@@ -1,5 +1,7 @@
 import { UsersService } from '../services'
 import { validationResult } from 'express-validator/src/validation-result'
+import { logEvents } from '../helpers'
+import { User } from './../models'
 
 export class UsersController {
   #_usersService
@@ -8,27 +10,25 @@ export class UsersController {
     this.#_usersService = new UsersService()
   }
 
-  async saveUser(req, res) {
+  getUserPasswords = async (req, res) => {
     try {
-      const errors = validationResult(req)
+      const userId = req.params.id
+      if (!userId) throw new Error('User Id Must be provided')
+      const user = await this.#_usersService.getUserPasswordsAsync(userId)
 
-      if (!errors.isEmpty()) {
-        return res.status(400).send({
-          message: 'User Schema not satisfied',
-          errors: errors.array(),
+      if (user) {
+        return res.status(200).json({
+          isSuccess: true,
+          message: 'Passwords',
+          passwords: user.Passwords,
         })
       }
-
-      const user = req.body
-      console.log(user)
-
-      res.status(200).send({
-        message: 'EXITO',
-      })
-    } catch (ex) {
-      res.status(500).send({
+      throw new Error('Passwords Not Found')
+    } catch (e) {
+      return res.status(404).json({
+        isSuccess: false,
         message: 'Error',
-        error: ex.message,
+        error: e.message,
       })
     }
   }
