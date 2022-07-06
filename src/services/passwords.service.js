@@ -23,5 +23,24 @@ export class PasswordsService {
     return await this.#_passwordsRepo.deleteAsync(passwordId)
   }
 
-  async addPasswordToCategoryAsync(passwordId, categoryId) {}
+  async addPasswordToCategoryAsync(passwordId, categoryId) {
+    return await this.#_passwordsRepo.updateAsync({
+      id: passwordId,
+      CategoryId: categoryId,
+    })
+  }
+
+  async findPasswordByIdAsync(passwordId) {
+    return await this.#_passwordsRepo.findByIdAsync(passwordId)
+  }
+
+  async generateRandomPasswordAsync(passwordOptions) {
+    return await cartography.CreatePasswordAsync(
+      passwordOptions.length,
+      passwordOptions.hasNumbers,
+      passwordOptions.hasSymbols,
+      passwordOptions.howNumbers,
+      passwordOptions.howSymbols,
+    )
+  }
 }

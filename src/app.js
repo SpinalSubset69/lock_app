@@ -2,7 +2,12 @@ import express from 'express'
 import cors from 'cors'
 import { db, connectToDatabase } from './database'
 import { BuildDBAssociations } from './models'
-import { authRoutes, passwordsRoutes, userRoutes } from './routes'
+import {
+  authRoutes,
+  passwordsRoutes,
+  userRoutes,
+  categoriesRoutes,
+} from './routes'
 
 const app = express()
 
@@ -19,5 +24,5 @@ BuildDBAssociations()
 app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/passwords', passwordsRoutes)
-
+app.use('/api/categories', categoriesRoutes)
 export default app

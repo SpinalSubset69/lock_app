@@ -1,3 +1,4 @@
+import { Category } from '../models'
 import { PasswordsService } from '../services/'
 
 export class PasswordsController {
@@ -29,5 +30,25 @@ export class PasswordsController {
 
   deletePassword = async (req, res) => {}
 
-  addPaswordToCategory = async (req, res) => {}
+  addPaswordToCategory = async (req, res) => {
+    try {
+      //MUST VERIFY CATEGORY BELONGS TO THE USER
+      const { CategoryId, passwordId } = req.body
+      await this.#_passwordsService.addPasswordToCategoryAsync(
+        passwordId,
+        CategoryId,
+      )
+
+      res.status(200).json({
+        message: 'Password saved on category',
+        isSuccess: true,
+      })
+    } catch (e) {
+      return res.status(404).json({
+        isSuccess: false,
+        message: 'Error',
+        error: e.message,
+      })
+    }
+  }
 }

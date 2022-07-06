@@ -1,0 +1,5 @@
+export const ALPHAS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+export const NUMBERS = '1234567890'
+export const SYMBOLS = '!@#$%^&*_-=+'
+export const ADD_NUMBERS_TO_PASSWORD = 'ADD_NUMBERS_TO_PASSWORD'
+export const ADD_SYMBOLS_TO_PASSWORD = 'ADD_SYMBOLS_TO_PASSWORD'

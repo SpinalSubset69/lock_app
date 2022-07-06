@@ -1,6 +1,6 @@
 import { db } from '../database'
 import { USERS_SCHEMA } from '../enums'
-import { Password } from '../models'
+import { Category, Password } from '../models'
 import { GenericRepository } from './generic.repository'
 
 export class UsersRepository extends GenericRepository {
@@ -25,6 +25,17 @@ export class UsersRepository extends GenericRepository {
       include: {
         model: Password,
         attributes: ['value', 'createdAt', 'updatedAt'],
+      },
+      where: {
+        id: userId,
+      },
+    })
+  }
+
+  async findUserbyIdWithCategoriesAsync(userId) {
+    return await this._db.models[this.schema].findByPk(userId, {
+      include: {
+        model: Category,
       },
       where: {
         id: userId,
